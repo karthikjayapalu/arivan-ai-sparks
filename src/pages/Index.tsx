@@ -11,21 +11,42 @@ const Index = () => {
   const scrollToServices = () => {
     const servicesSection = document.getElementById('services');
     if (servicesSection) {
-      servicesSection.scrollIntoView({ behavior: 'smooth' });
+      const headerOffset = 80;
+      const elementPosition = servicesSection.offsetTop;
+      const offsetPosition = elementPosition - headerOffset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
   };
 
   const scrollToContact = () => {
     const contactSection = document.querySelector('[data-contact]');
     if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
+      const headerOffset = 80;
+      const elementPosition = contactSection.offsetTop;
+      const offsetPosition = elementPosition - headerOffset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
   };
 
   const scrollToCaseStudies = () => {
     const caseStudiesSection = document.getElementById('case-studies');
     if (caseStudiesSection) {
-      caseStudiesSection.scrollIntoView({ behavior: 'smooth' });
+      const headerOffset = 80;
+      const elementPosition = caseStudiesSection.offsetTop;
+      const offsetPosition = elementPosition - headerOffset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
   };
 
@@ -41,7 +62,7 @@ const Index = () => {
               AI Services for the <span className="text-arivan-accent">Modern Enterprise</span>
             </h1>
             <p className="text-xl md:text-2xl mb-6 text-white/90 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-              Global AI Solutions, Powered by Bengaluru's Expertise
+              Advanced AI Solutions with World-Class Expertise
             </p>
             <p className="text-lg mb-8 max-w-2xl text-white/80 animate-fade-in" style={{ animationDelay: "0.4s" }}>
               At <span className="font-bold">Arivan.ai</span>, we build cutting-edge AI systems that help businesses automate, optimize, and innovate. Partnering with clients worldwide, we deliver scalable AI solutions tailored to your industry's unique challenges.
@@ -56,7 +77,8 @@ const Index = () => {
               </Button>
               <Button 
                 size="lg" 
-                className="bg-arivan-accent/10 border border-arivan-accent text-arivan-accent hover:bg-arivan-accent hover:text-white transition-all duration-300"
+                variant="outline"
+                className="border-white text-white hover:bg-white hover:text-arivan-primary transition-all duration-300"
                 onClick={scrollToServices}
               >
                 Explore Services

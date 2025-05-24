@@ -16,13 +16,15 @@ const Navbar = () => {
         setIsScrolled(false);
       }
 
-      // Check which section is currently in view
+      // Check which section is currently in view with better detection
       const sections = ['services', 'case-studies', 'innovations', 'delivery', 'why'];
       const currentSection = sections.find(section => {
         const element = document.getElementById(section);
         if (element) {
           const rect = element.getBoundingClientRect();
-          return rect.top <= 100 && rect.bottom >= 100;
+          const viewportHeight = window.innerHeight;
+          // Consider a section active if it's within the top 20% of the viewport
+          return rect.top <= viewportHeight * 0.2 && rect.bottom >= viewportHeight * 0.2;
         }
         return false;
       });
@@ -31,24 +33,33 @@ const Navbar = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
+    // Call once to set initial state
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId) || document.querySelector(`[data-${sectionId}]`);
     if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
+      const headerOffset = 80; // Account for fixed header
+      const elementPosition = section.offsetTop;
+      const offsetPosition = elementPosition - headerOffset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
       setIsMobileMenuOpen(false);
     }
   };
 
   const getNavLinkClass = (sectionId: string) => {
-    const baseClass = `font-medium transition-colors ${
+    const baseClass = `font-medium transition-colors duration-200 ${
       isScrolled ? 'text-arivan-primary hover:text-arivan-accent' : 'text-white/90 hover:text-white'
     }`;
     
     if (activeSection === sectionId) {
-      return `${baseClass} ${isScrolled ? 'text-arivan-accent' : 'text-arivan-accent'}`;
+      return `${baseClass} ${isScrolled ? 'text-arivan-accent border-b-2 border-arivan-accent' : 'text-arivan-accent border-b-2 border-arivan-accent'}`;
     }
     
     return baseClass;
@@ -124,40 +135,40 @@ const Navbar = () => {
           <div className="container mx-auto px-4 flex flex-col space-y-4">
             <button 
               onClick={() => scrollToSection('services')} 
-              className={`font-medium p-2 text-left ${
-                activeSection === 'services' ? 'text-arivan-accent' : 'text-arivan-primary hover:text-arivan-accent'
+              className={`font-medium p-2 text-left transition-colors ${
+                activeSection === 'services' ? 'text-arivan-accent bg-arivan-accent/10' : 'text-arivan-primary hover:text-arivan-accent'
               }`}
             >
               Services
             </button>
             <button 
               onClick={() => scrollToSection('case-studies')} 
-              className={`font-medium p-2 text-left ${
-                activeSection === 'case-studies' ? 'text-arivan-accent' : 'text-arivan-primary hover:text-arivan-accent'
+              className={`font-medium p-2 text-left transition-colors ${
+                activeSection === 'case-studies' ? 'text-arivan-accent bg-arivan-accent/10' : 'text-arivan-primary hover:text-arivan-accent'
               }`}
             >
               Case Studies
             </button>
             <button 
               onClick={() => scrollToSection('innovations')} 
-              className={`font-medium p-2 text-left ${
-                activeSection === 'innovations' ? 'text-arivan-accent' : 'text-arivan-primary hover:text-arivan-accent'
+              className={`font-medium p-2 text-left transition-colors ${
+                activeSection === 'innovations' ? 'text-arivan-accent bg-arivan-accent/10' : 'text-arivan-primary hover:text-arivan-accent'
               }`}
             >
               Research
             </button>
             <button 
               onClick={() => scrollToSection('delivery')} 
-              className={`font-medium p-2 text-left ${
-                activeSection === 'delivery' ? 'text-arivan-accent' : 'text-arivan-primary hover:text-arivan-accent'
+              className={`font-medium p-2 text-left transition-colors ${
+                activeSection === 'delivery' ? 'text-arivan-accent bg-arivan-accent/10' : 'text-arivan-primary hover:text-arivan-accent'
               }`}
             >
               How We Work
             </button>
             <button 
               onClick={() => scrollToSection('why')} 
-              className={`font-medium p-2 text-left ${
-                activeSection === 'why' ? 'text-arivan-accent' : 'text-arivan-primary hover:text-arivan-accent'
+              className={`font-medium p-2 text-left transition-colors ${
+                activeSection === 'why' ? 'text-arivan-accent bg-arivan-accent/10' : 'text-arivan-primary hover:text-arivan-accent'
               }`}
             >
               Why Us

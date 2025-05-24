@@ -5,6 +5,20 @@ import { Button } from '@/components/ui/button';
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId) || document.querySelector(`[data-${sectionId}]`);
+    if (section) {
+      const headerOffset = 80;
+      const elementPosition = section.offsetTop;
+      const offsetPosition = elementPosition - headerOffset;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <footer className="bg-arivan-primary text-white pt-12 pb-6">
       <div className="container mx-auto px-4">
@@ -12,11 +26,14 @@ const Footer = () => {
           <div className="md:col-span-5">
             <h2 className="text-2xl font-bold mb-4">Arivan<span className="text-arivan-accent">.ai</span></h2>
             <p className="mb-4 text-arivan-light/90 max-w-md">
-              Global AI solutions powered by Bengaluru's expertise. 
+              Advanced AI solutions with world-class expertise. 
               We build cutting-edge AI systems that help businesses automate, optimize, and innovate.
             </p>
             <div>
-              <Button className="bg-arivan-accent hover:bg-arivan-accent/90 text-white">
+              <Button 
+                className="bg-arivan-accent hover:bg-arivan-accent/90 text-white"
+                onClick={() => scrollToSection('contact')}
+              >
                 Let's Build Your AI Future
               </Button>
             </div>
@@ -25,10 +42,46 @@ const Footer = () => {
           <div className="md:col-span-3">
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><a href="#services" className="text-arivan-light/90 hover:text-white transition-colors">Services</a></li>
-              <li><a href="#innovations" className="text-arivan-light/90 hover:text-white transition-colors">Innovations</a></li>
-              <li><a href="#delivery" className="text-arivan-light/90 hover:text-white transition-colors">How We Deliver</a></li>
-              <li><a href="#why" className="text-arivan-light/90 hover:text-white transition-colors">Why Arivan.ai</a></li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('services')} 
+                  className="text-arivan-light/90 hover:text-white transition-colors text-left"
+                >
+                  Services
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('case-studies')} 
+                  className="text-arivan-light/90 hover:text-white transition-colors text-left"
+                >
+                  Case Studies
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('innovations')} 
+                  className="text-arivan-light/90 hover:text-white transition-colors text-left"
+                >
+                  Research
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('delivery')} 
+                  className="text-arivan-light/90 hover:text-white transition-colors text-left"
+                >
+                  How We Work
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('why')} 
+                  className="text-arivan-light/90 hover:text-white transition-colors text-left"
+                >
+                  Why Us
+                </button>
+              </li>
             </ul>
           </div>
           
