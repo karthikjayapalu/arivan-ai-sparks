@@ -20,6 +20,14 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId) || document.querySelector(`[data-${sectionId}]`);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+      setIsMobileMenuOpen(false);
+    }
+  };
+
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -34,20 +42,41 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
-          <a href="#services" className={`font-medium transition-colors ${isScrolled ? 'text-arivan-primary hover:text-arivan-accent' : 'text-white/90 hover:text-white'}`}>
+        <nav className="hidden md:flex items-center space-x-6">
+          <button 
+            onClick={() => scrollToSection('services')} 
+            className={`font-medium transition-colors ${isScrolled ? 'text-arivan-primary hover:text-arivan-accent' : 'text-white/90 hover:text-white'}`}
+          >
             Services
-          </a>
-          <a href="#innovations" className={`font-medium transition-colors ${isScrolled ? 'text-arivan-primary hover:text-arivan-accent' : 'text-white/90 hover:text-white'}`}>
-            Innovations
-          </a>
-          <a href="#delivery" className={`font-medium transition-colors ${isScrolled ? 'text-arivan-primary hover:text-arivan-accent' : 'text-white/90 hover:text-white'}`}>
-            How We Deliver
-          </a>
-          <a href="#why" className={`font-medium transition-colors ${isScrolled ? 'text-arivan-primary hover:text-arivan-accent' : 'text-white/90 hover:text-white'}`}>
+          </button>
+          <button 
+            onClick={() => scrollToSection('case-studies')} 
+            className={`font-medium transition-colors ${isScrolled ? 'text-arivan-primary hover:text-arivan-accent' : 'text-white/90 hover:text-white'}`}
+          >
+            Case Studies
+          </button>
+          <button 
+            onClick={() => scrollToSection('innovations')} 
+            className={`font-medium transition-colors ${isScrolled ? 'text-arivan-primary hover:text-arivan-accent' : 'text-white/90 hover:text-white'}`}
+          >
+            Research
+          </button>
+          <button 
+            onClick={() => scrollToSection('delivery')} 
+            className={`font-medium transition-colors ${isScrolled ? 'text-arivan-primary hover:text-arivan-accent' : 'text-white/90 hover:text-white'}`}
+          >
+            How We Work
+          </button>
+          <button 
+            onClick={() => scrollToSection('why')} 
+            className={`font-medium transition-colors ${isScrolled ? 'text-arivan-primary hover:text-arivan-accent' : 'text-white/90 hover:text-white'}`}
+          >
             Why Us
-          </a>
-          <Button className="bg-arivan-accent hover:bg-arivan-accent/90 text-white">
+          </button>
+          <Button 
+            className="bg-arivan-accent hover:bg-arivan-accent/90 text-white"
+            onClick={() => scrollToSection('contact')}
+          >
             Contact Us
           </Button>
         </nav>
@@ -67,19 +96,40 @@ const Navbar = () => {
       {isMobileMenuOpen && (
         <div className="md:hidden bg-white py-4 shadow-lg">
           <div className="container mx-auto px-4 flex flex-col space-y-4">
-            <a href="#services" className="font-medium text-arivan-primary hover:text-arivan-accent p-2" onClick={() => setIsMobileMenuOpen(false)}>
+            <button 
+              onClick={() => scrollToSection('services')} 
+              className="font-medium text-arivan-primary hover:text-arivan-accent p-2 text-left"
+            >
               Services
-            </a>
-            <a href="#innovations" className="font-medium text-arivan-primary hover:text-arivan-accent p-2" onClick={() => setIsMobileMenuOpen(false)}>
-              Innovations
-            </a>
-            <a href="#delivery" className="font-medium text-arivan-primary hover:text-arivan-accent p-2" onClick={() => setIsMobileMenuOpen(false)}>
-              How We Deliver
-            </a>
-            <a href="#why" className="font-medium text-arivan-primary hover:text-arivan-accent p-2" onClick={() => setIsMobileMenuOpen(false)}>
+            </button>
+            <button 
+              onClick={() => scrollToSection('case-studies')} 
+              className="font-medium text-arivan-primary hover:text-arivan-accent p-2 text-left"
+            >
+              Case Studies
+            </button>
+            <button 
+              onClick={() => scrollToSection('innovations')} 
+              className="font-medium text-arivan-primary hover:text-arivan-accent p-2 text-left"
+            >
+              Research
+            </button>
+            <button 
+              onClick={() => scrollToSection('delivery')} 
+              className="font-medium text-arivan-primary hover:text-arivan-accent p-2 text-left"
+            >
+              How We Work
+            </button>
+            <button 
+              onClick={() => scrollToSection('why')} 
+              className="font-medium text-arivan-primary hover:text-arivan-accent p-2 text-left"
+            >
               Why Us
-            </a>
-            <Button className="bg-arivan-accent hover:bg-arivan-accent/90 text-white w-full">
+            </button>
+            <Button 
+              className="bg-arivan-accent hover:bg-arivan-accent/90 text-white w-full"
+              onClick={() => scrollToSection('contact')}
+            >
               Contact Us
             </Button>
           </div>
