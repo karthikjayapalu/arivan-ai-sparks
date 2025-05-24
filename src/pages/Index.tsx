@@ -22,6 +22,13 @@ const Index = () => {
     }
   };
 
+  const scrollToCaseStudies = () => {
+    const caseStudiesSection = document.getElementById('case-studies');
+    if (caseStudiesSection) {
+      caseStudiesSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
@@ -276,7 +283,12 @@ const Index = () => {
             <Button size="lg" className="bg-arivan-accent hover:bg-arivan-accent/90 text-white">
               Get A Free Consultation
             </Button>
-            <Button size="lg" variant="outline" className="border-arivan-primary text-arivan-primary hover:bg-arivan-primary hover:text-white">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="border-arivan-primary text-arivan-primary hover:bg-arivan-primary hover:text-white"
+              onClick={scrollToCaseStudies}
+            >
               View Case Studies
             </Button>
           </div>

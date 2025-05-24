@@ -6,6 +6,7 @@ import { Menu } from 'lucide-react';
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,6 +15,19 @@ const Navbar = () => {
       } else {
         setIsScrolled(false);
       }
+
+      // Check which section is currently in view
+      const sections = ['services', 'case-studies', 'innovations', 'delivery', 'why'];
+      const currentSection = sections.find(section => {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return rect.top <= 100 && rect.bottom >= 100;
+        }
+        return false;
+      });
+      
+      setActiveSection(currentSection || '');
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -26,6 +40,18 @@ const Navbar = () => {
       section.scrollIntoView({ behavior: 'smooth' });
       setIsMobileMenuOpen(false);
     }
+  };
+
+  const getNavLinkClass = (sectionId: string) => {
+    const baseClass = `font-medium transition-colors ${
+      isScrolled ? 'text-arivan-primary hover:text-arivan-accent' : 'text-white/90 hover:text-white'
+    }`;
+    
+    if (activeSection === sectionId) {
+      return `${baseClass} ${isScrolled ? 'text-arivan-accent' : 'text-arivan-accent'}`;
+    }
+    
+    return baseClass;
   };
 
   return (
@@ -45,31 +71,31 @@ const Navbar = () => {
         <nav className="hidden md:flex items-center space-x-6">
           <button 
             onClick={() => scrollToSection('services')} 
-            className={`font-medium transition-colors ${isScrolled ? 'text-arivan-primary hover:text-arivan-accent' : 'text-white/90 hover:text-white'}`}
+            className={getNavLinkClass('services')}
           >
             Services
           </button>
           <button 
             onClick={() => scrollToSection('case-studies')} 
-            className={`font-medium transition-colors ${isScrolled ? 'text-arivan-primary hover:text-arivan-accent' : 'text-white/90 hover:text-white'}`}
+            className={getNavLinkClass('case-studies')}
           >
             Case Studies
           </button>
           <button 
             onClick={() => scrollToSection('innovations')} 
-            className={`font-medium transition-colors ${isScrolled ? 'text-arivan-primary hover:text-arivan-accent' : 'text-white/90 hover:text-white'}`}
+            className={getNavLinkClass('innovations')}
           >
             Research
           </button>
           <button 
             onClick={() => scrollToSection('delivery')} 
-            className={`font-medium transition-colors ${isScrolled ? 'text-arivan-primary hover:text-arivan-accent' : 'text-white/90 hover:text-white'}`}
+            className={getNavLinkClass('delivery')}
           >
             How We Work
           </button>
           <button 
             onClick={() => scrollToSection('why')} 
-            className={`font-medium transition-colors ${isScrolled ? 'text-arivan-primary hover:text-arivan-accent' : 'text-white/90 hover:text-white'}`}
+            className={getNavLinkClass('why')}
           >
             Why Us
           </button>
@@ -98,31 +124,41 @@ const Navbar = () => {
           <div className="container mx-auto px-4 flex flex-col space-y-4">
             <button 
               onClick={() => scrollToSection('services')} 
-              className="font-medium text-arivan-primary hover:text-arivan-accent p-2 text-left"
+              className={`font-medium p-2 text-left ${
+                activeSection === 'services' ? 'text-arivan-accent' : 'text-arivan-primary hover:text-arivan-accent'
+              }`}
             >
               Services
             </button>
             <button 
               onClick={() => scrollToSection('case-studies')} 
-              className="font-medium text-arivan-primary hover:text-arivan-accent p-2 text-left"
+              className={`font-medium p-2 text-left ${
+                activeSection === 'case-studies' ? 'text-arivan-accent' : 'text-arivan-primary hover:text-arivan-accent'
+              }`}
             >
               Case Studies
             </button>
             <button 
               onClick={() => scrollToSection('innovations')} 
-              className="font-medium text-arivan-primary hover:text-arivan-accent p-2 text-left"
+              className={`font-medium p-2 text-left ${
+                activeSection === 'innovations' ? 'text-arivan-accent' : 'text-arivan-primary hover:text-arivan-accent'
+              }`}
             >
               Research
             </button>
             <button 
               onClick={() => scrollToSection('delivery')} 
-              className="font-medium text-arivan-primary hover:text-arivan-accent p-2 text-left"
+              className={`font-medium p-2 text-left ${
+                activeSection === 'delivery' ? 'text-arivan-accent' : 'text-arivan-primary hover:text-arivan-accent'
+              }`}
             >
               How We Work
             </button>
             <button 
               onClick={() => scrollToSection('why')} 
-              className="font-medium text-arivan-primary hover:text-arivan-accent p-2 text-left"
+              className={`font-medium p-2 text-left ${
+                activeSection === 'why' ? 'text-arivan-accent' : 'text-arivan-primary hover:text-arivan-accent'
+              }`}
             >
               Why Us
             </button>
