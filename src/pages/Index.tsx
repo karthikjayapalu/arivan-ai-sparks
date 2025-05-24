@@ -9,7 +9,7 @@ import DeliveryMethod from '@/components/DeliveryMethod';
 
 const Index = () => {
   const scrollToServices = () => {
-    const servicesSection = document.getElementById('services');
+    const servicesSection = document.getElementById('services') as HTMLElement;
     if (servicesSection) {
       const headerOffset = 80;
       const elementPosition = servicesSection.offsetTop;
@@ -23,7 +23,7 @@ const Index = () => {
   };
 
   const scrollToContact = () => {
-    const contactSection = document.querySelector('[data-contact]');
+    const contactSection = document.querySelector('[data-contact]') as HTMLElement;
     if (contactSection) {
       const headerOffset = 80;
       const elementPosition = contactSection.offsetTop;
@@ -37,7 +37,7 @@ const Index = () => {
   };
 
   const scrollToCaseStudies = () => {
-    const caseStudiesSection = document.getElementById('case-studies');
+    const caseStudiesSection = document.getElementById('case-studies') as HTMLElement;
     if (caseStudiesSection) {
       const headerOffset = 80;
       const elementPosition = caseStudiesSection.offsetTop;
